@@ -1,26 +1,33 @@
+// src/app/recipe/recipe-list/recipe-list.component.ts
 import { Component, OnInit } from '@angular/core';
-import { Recipe } from '../Recipe';
-import { recipeData } from '../recipeData';
+import { Router }            from '@angular/router';
+import { Recipe }            from '../Recipe';
+import { RecipeService }     from '../recipe.service';
+import { RecipeDetailComponent } from '../recipe-detail/recipe-detail.component';
 
 @Component({
   selector: 'app-recipe-list',
   standalone: false,
   templateUrl: './recipe-list.component.html',
-  styleUrl: './recipe-list.component.css',
+  styleUrls: ['./recipe-list.component.css']
 })
 export class RecipeListComponent implements OnInit {
-  recipes: Recipe[] = [];
-  selected: Boolean = false;
+  recipes: Array<RecipeDetailComponent> = [];
+   selected: Boolean = false;
   selectedRecipe: Recipe | null = null;
 
-  constructor() {}
+  constructor(
+    private recipeService: RecipeService,
+    private router: Router
+  ) { }
 
-  ngOnInit() {
-    this.recipes = recipeData;
+  ngOnInit(): void {
+    this.recipeService.listarRecipes();
   }
 
-  onSelect(recipe: Recipe) {
+  onSelected(recipe: Recipe): void {
     this.selectedRecipe = recipe;
     this.selected = true;
   }
 }
+

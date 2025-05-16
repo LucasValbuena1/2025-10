@@ -1,31 +1,36 @@
-<div>
-  <div>
-    <div *ngIf="selected">
-      <app-recipe-detail [recipe]="selectedRecipe"></app-recipe-detail>
+<div class="container-fluid py-5" style="background-color: #ffc0cb;">
+  <div class="container">
+    <div class="row">
+      <div
+        class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4"
+        *ngFor="let recipe of recipes"
+      >
+        <div class="card h-100">
+          <img
+            [src]="recipe.imagen"
+            class="card-img-top"
+            alt="{{ recipe.nombre }}"
+          />
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">{{ recipe.nombre }}</h5>
+            <ul class="list-unstyled mb-3" *ngIf="recipe.tags?.length">
+              <li *ngFor="let tag of recipe.tags">• {{ tag }}</li>
+            </ul>
+            <p class="mb-2">
+              <strong>Porciones:</strong> {{ recipe.porciones }}
+            </p>
+            <p class="mb-3">
+              <strong># Ingredientes:</strong> {{ recipe.ingredientes.length }}
+            </p>
+            <a
+              class="btn btn-primary mt-auto"
+              [routerLink]="['/recipe', recipe.id]"
+            >
+              Ver la receta
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
-    <table>
-      <thead>
-        <tr>
-          <th>Receta</th>
-          <th>Imagen</th>
-          <th>Porciones</th>
-          <th>Tiempo</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let recipe of recipes" (click)="onSelect(recipe)">
-          <td>{{ recipe.nombre }}</td>
-          <td>
-            <img
-              class="recipe-img"
-              [src]="recipe.imagen"
-              alt="{{ recipe.imagen }}"
-            />
-          </td>
-          <td>{{ recipe.porciones }}</td>
-          <td>{{ recipe.tiempo_minutos }} min</td>
-        </tr>
-      </tbody>
-    </table>
   </div>
 </div>
