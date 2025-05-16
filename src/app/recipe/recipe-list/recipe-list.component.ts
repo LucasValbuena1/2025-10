@@ -1,4 +1,3 @@
-// src/app/recipe/recipe-list/recipe-list.component.ts
 import { Component, OnInit } from '@angular/core';
 import { Router }            from '@angular/router';
 import { Recipe }            from '../Recipe';
